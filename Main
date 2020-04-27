@@ -1,0 +1,47 @@
+package pollar.dev;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Main extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+        Bukkit.getPluginManager().registerEvents(new Eventos(), this); //Registrar os Eventos em outra classe.
+
+    }
+
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String lb, String[] args) {
+            if (!(sender instanceof Player)) {
+                sender.sendMessage("Comando in-game");
+                return true;
+            }
+
+
+            if(cmd.getName().equalsIgnoreCase("tutorial")){
+            Player p = (Player) sender;
+
+            Inventory inv = Bukkit.createInventory(null, 9 * 6, "§aSei lá");
+            ItemStack item = new ItemStack(Material.REDSTONE_BLOCK);
+            item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 10); // Colocar encantamento
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName("§aAlgo legal aqui hehe");
+            item.setItemMeta(meta);
+            inv.setItem(13, item);
+            p.openInventory(inv);
+
+
+        }
+        return false;
+    }
+}
