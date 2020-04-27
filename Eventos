@@ -1,0 +1,26 @@
+package pollar.dev;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+
+public class Eventos implements Listener {
+
+    @EventHandler
+    public void onInteract(InventoryClickEvent e){
+        if(e.getInventory().getTitle().equalsIgnoreCase("§aSei la")){
+            e.setCancelled(true);
+            if(e.getCurrentItem().hasItemMeta()){
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aAlgo legal aqui hehe")){
+                    e.getWhoClicked().sendMessage("§cInfelizmente, não é possível.");
+                    e.getWhoClicked().closeInventory();
+                }
+            }
+        }
+
+    }
+
+
+}
